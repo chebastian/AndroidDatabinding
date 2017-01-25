@@ -76,7 +76,7 @@ public class FirstVM extends BaseObservable implements SampleModel.ClickedListen
         list.add(2);
         list.add(3);
 
-        Observable.timer(0,1,TimeUnit.SECONDS).take(10)
+        Observable.timer(0,50,TimeUnit.MILLISECONDS).take(10)
         .observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Long>() {
             @Override
             public void onCompleted() {
@@ -93,6 +93,27 @@ public class FirstVM extends BaseObservable implements SampleModel.ClickedListen
                 Name.set(num.toString());
                 ListOfThings.add(new SampleModel("SEfe 1" + num.toString(), num.intValue()));
                 ListOfThings.add(new SampleModel("SEfe 2", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
+                ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
                 ListOfThings.add(new SampleModel("SEfe 3", num.intValue()));
             }
         });

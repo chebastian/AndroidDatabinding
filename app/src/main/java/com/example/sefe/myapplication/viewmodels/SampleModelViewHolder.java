@@ -12,10 +12,10 @@ import com.example.sefe.myapplication.databinding.ModelItemBinding;
  * Created by sefe on 1/20/2017.
  */
 
-public class ModelViewHolder extends RecyclerView.ViewHolder {
+public class SampleModelViewHolder extends RecyclerViewItemHolder<SampleModel,ModelItemBinding>{
 
-    ModelItemBinding binding;
-    public ModelViewHolder(View itemView) {
+    //ModelItemBinding binding;
+    public SampleModelViewHolder(View itemView) {
         super(itemView);
         binding = DataBindingUtil.bind(itemView);
     }

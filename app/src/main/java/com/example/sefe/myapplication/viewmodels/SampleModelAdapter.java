@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by sefe on 1/20/2017.
  */
-public class SampleModelAdapter extends RecyclerView.Adapter<ModelViewHolder> implements SampleModel.ClickedListener {
+public class SampleModelAdapter extends RecyclerView.Adapter<SampleModelViewHolder> implements SampleModel.ClickedListener {
 
     private final List<SampleModel> items;
     SampleModel.ClickedListener Listener;
@@ -29,20 +30,22 @@ public class SampleModelAdapter extends RecyclerView.Adapter<ModelViewHolder> im
     }
 
     @Override
-    public ModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SampleModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context ctx = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(ctx);
         View status = inflater.inflate(R.layout.model_item,parent,false);
+        Log.d("Adapter", "Creating");
         _parent = parent;
-        return new ModelViewHolder(status);
+        return new SampleModelViewHolder(status);
     }
 
     @Override
-    public void onBindViewHolder(ModelViewHolder holder, int position) {
+    public void onBindViewHolder(SampleModelViewHolder holder, int position) {
         SampleModel model = items.get(position);
         model.Listener = Listener;
         model.Listener = this;
         holder.bind(model);
+        Log.d("Adapter", "Rebind");
     }
 
     @Override
