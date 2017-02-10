@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sefe.myapplication.R;
+import com.example.sefe.myapplication.databinding.ModelItemBinding;
 
 import java.util.List;
 
 /**
  * Created by sefe on 1/20/2017.
  */
-public class SampleModelAdapter extends RecyclerView.Adapter<SampleModelViewHolder> implements SampleModel.ClickedListener {
+public class SampleModelAdapter extends RecyclerBindingAdapter<SampleModel,SampleModelViewHolder> implements SampleModel.ClickedListener {
 
     private final List<SampleModel> items;
     SampleModel.ClickedListener Listener;
@@ -25,6 +26,7 @@ public class SampleModelAdapter extends RecyclerView.Adapter<SampleModelViewHold
 
     public SampleModelAdapter(List<SampleModel> theItems, SampleModel.ClickedListener clicked)
     {
+        super(theItems);
         items = theItems;
         Listener = clicked;
     }
@@ -41,16 +43,12 @@ public class SampleModelAdapter extends RecyclerView.Adapter<SampleModelViewHold
 
     @Override
     public void onBindViewHolder(SampleModelViewHolder holder, int position) {
-        SampleModel model = items.get(position);
-        model.Listener = Listener;
-        model.Listener = this;
-        holder.bind(model);
-        Log.d("Adapter", "Rebind");
+
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return 0;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

@@ -77,7 +77,9 @@ public class FirstVM extends BaseObservable implements SampleModel.ClickedListen
         list.add(3);
 
         Observable.timer(0,50,TimeUnit.MILLISECONDS).take(10)
-        .observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Long>() {
+        .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread()).
+                subscribe(new Observer<Long>() {
             @Override
             public void onCompleted() {
                 Name.set("COMPLETED");

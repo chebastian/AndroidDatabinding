@@ -10,8 +10,11 @@ import java.util.List;
 
 /**
  * Created by sefe on 1/25/2017.
+ * @Param T: Something something
+ * @Param M: The model that...
+ *
  */
-public abstract class RecyclerBindingAdapter<M,T extends RecyclerViewItemHolder<M,T>> extends RecyclerView.Adapter<RecyclerViewItemHolder<M,T>>{
+public abstract class RecyclerBindingAdapter<M,T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T>{
 
     private final List<M>  items;
     public RecyclerBindingAdapter(List<M> theItems)
@@ -20,14 +23,14 @@ public abstract class RecyclerBindingAdapter<M,T extends RecyclerViewItemHolder<
         items = theItems;
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerViewItemHolder<M, T> holder, int position) {
-        M model = items.get(position);
-        holder.bind(model);
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
+//    @Override
+//    public void onBindViewHolder(RecyclerViewItemHolder<M, T> holder, int position) {
+//        M model = items.get(position);
+//        holder.bind(model);
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return items.size();
+//    }
 }
