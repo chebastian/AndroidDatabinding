@@ -1,8 +1,5 @@
 package com.example.sefe.myapplication;
 
-import java.nio.Buffer;
-import java.util.ArrayList;
-
 
 /**
  * Created by sefe on 2017-02-08.
@@ -15,19 +12,19 @@ public class BufferStream implements IBufferLoadCompleteListener {
         currentIndex = nextIndex;
     }
 
-    public interface IBufferListener
+    public interface IBufferLoader
     {
         void reloadBufferAtWithSize(int start, int length, IBufferLoadCompleteListener onComplete);
     }
 
-    private IBufferListener _listener;
+    private IBufferLoader _listener;
     private float bufferLoadPercent;
     private int currentIndex;
     private int bufferSize;
     private int nextIndex;
     private boolean isLoading;
 
-    public BufferStream(IBufferListener listener)
+    public BufferStream(IBufferLoader listener)
     {
         _listener = listener;
     }
@@ -35,7 +32,6 @@ public class BufferStream implements IBufferLoadCompleteListener {
     public void setBufferLoadAtPercent(float bufferLoadOffset) {
         this.bufferLoadPercent = bufferLoadOffset;
     }
-
 
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;

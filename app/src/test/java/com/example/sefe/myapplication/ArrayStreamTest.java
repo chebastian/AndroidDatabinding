@@ -21,18 +21,18 @@ public class ArrayStreamTest {
     private boolean wasReloaded;
 
 
-
     @Before
     public void setup()
     {
         wasReloaded = false;
-        buff = new BufferStream(new BufferStream.IBufferListener() {
+        buff = new BufferStream(new BufferStream.IBufferLoader() {
             @Override
             public void reloadBufferAtWithSize(int start, int length, IBufferLoadCompleteListener listener) {
                 wasReloaded = true;
                 listener.onComplete();
             }
         });
+
         buff.setBufferLoadAtPercent(0.2f);
         buff.setCurrentIndex(300);
         buff.setBufferSize(50);
@@ -71,6 +71,7 @@ public class ArrayStreamTest {
     {
         int oldIndex = buff.CurrentMidpoint();
         buff.setCurrentReadingIndex(index_outside_end_of_buffer);
+
         Assert.assertTrue("No reload after read", wasReloaded);
         int newIndex = buff.CurrentMidpoint();
         Assert.assertFalse("index should have moved", oldIndex == newIndex);
@@ -81,9 +82,20 @@ public class ArrayStreamTest {
     {
         int oldIndex = buff.CurrentMidpoint();
         buff.setCurrentReadingIndex(index_outside_whole_buffer);
+
         Assert.assertTrue("No reload after read", wasReloaded);
         int newIndex = buff.CurrentMidpoint();
         Assert.assertFalse("index should have moved", oldIndex == newIndex);
+    }
+
+    @Test
+    public void movesMidpointAfterReload()
+    {
+        int oldIndex = buff.CurrentMidpoint();
+        buff.setCurrentReadingIndex(index_outside_whole_buffer);
+        int newIndex = buff.CurrentMidpoint();
+
+        Assert.assertEquals("midpoint should switch to last read", index_outside_whole_buffer,newIndex);
     }
 
 }
