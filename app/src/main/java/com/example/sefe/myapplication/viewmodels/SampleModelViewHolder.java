@@ -22,6 +22,7 @@ public class SampleModelViewHolder extends RecyclerViewItemHolder<SampleModel,Mo
 
     public void bind(SampleModel model)
     {
+        binding.setModel(model);
 //        binding.setModel(model);
     }
 
