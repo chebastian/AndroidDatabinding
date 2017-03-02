@@ -1,12 +1,19 @@
 package com.example.sefe.myapplication.fragment;
 
-import android.app.Fragment;
+import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.sefe.myapplication.DatabindingFragment;
 import com.example.sefe.myapplication.R;
 import com.example.sefe.myapplication.interfaces.IDetailsRepository;
+import com.example.sefe.myapplication.viewmodels.NodeIdentifier;
 import com.example.sefe.myapplication.viewmodels.InspectionViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.subscribers.ResourceSubscriber;
 
 /**
  * Created by sefe on 2/28/2017.
@@ -33,7 +40,28 @@ public class InspectionViewFragment extends DatabindingFragment<InspectionViewMo
     @Override
     public void onCreate(Bundle savedInstance)
     {
-        _viewModel = new InspectionViewModel(getArguments().getInt(PARAM_ALTERNATIVE_ID),repository);
+        int parent = getArguments().getInt(PARAM_ALTERNATIVE_ID);
+        final List<NodeIdentifier> ids = new ArrayList<>();
+
+        repository.getIdsForNodeWithParent(new NodeIdentifier(parent), new ResourceSubscriber<NodeIdentifier>() {
+            @Override
+            public void onNext(NodeIdentifier detailsIdentifier) {
+                 ids.add(detailsIdentifier);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                 //_viewModel = new InspectionViewModel(repository,ids);
+                _viewModel = new ObservableField<>(new InspectionViewModel(repository,ids));
+            }
+        });
+
+        _viewModel = new ObservableField<>(new InspectionViewModel(getArguments().getInt(PARAM_ALTERNATIVE_ID),repository));
         super.onCreate(savedInstance);
     }
 

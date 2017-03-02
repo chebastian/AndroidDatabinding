@@ -3,7 +3,9 @@ package com.example.sefe.myapplication;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.databinding.ViewDataBinding;
+import android.databinding.tool.Binding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -19,12 +21,14 @@ public class DatabindingFragment<VM extends Object> extends Fragment{
     protected static final String PARAM_VM = "param_vm";
 
     protected @LayoutRes  int _layoutId;
-    protected VM _viewModel;
+    protected ObservableField<VM> _viewModel;
 
     public DatabindingFragment()
     {
         super();
     }
+    //ObservableField<ViewDataBinding> binding;
+    ViewDataBinding binding;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,7 @@ public class DatabindingFragment<VM extends Object> extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewDataBinding binding = DataBindingUtil.inflate(inflater, _layoutId,container,false);
-        binding.setVariable(BR.viewmodel,_viewModel);
+        binding.setVariable(BR.viewmodel,_viewModel.get());
         return binding.getRoot();
     }
 }
